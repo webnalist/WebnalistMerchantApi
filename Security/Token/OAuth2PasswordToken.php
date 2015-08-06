@@ -3,8 +3,7 @@
 namespace Webnalist\Security\Token;
 
 use Webnalist\Security\AuthToken;
-use Webnalist\Security\SecurityException;
-use Webnalist\Security\SecurityExceptions;
+use Webnalist\Exception\SecurityException;
 
 /**
  * Class OAuth2PasswordToken
@@ -44,7 +43,7 @@ class OAuth2PasswordToken extends AuthToken
      * @param $params
      * @param $url
      * @return mixed
-     * @throws SecurityException
+     * @throws \Webnalist\Exception\SecurityException
      */
     private function curlPostRequest(Array $params, $url)
     {
@@ -69,7 +68,7 @@ class OAuth2PasswordToken extends AuthToken
 
     /**
      * @return bool
-     * @throws SecurityException
+     * @throws \Webnalist\Exception\SecurityException
      */
     public function authorize()
     {
