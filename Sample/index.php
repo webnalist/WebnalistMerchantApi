@@ -3,7 +3,7 @@
 require_once('config/config.php');
 require_once('../WebnalistMerchantApi.php');
 require_once('../Security/Token/OAuth2PasswordToken.php');
-require_once('../Security/SecurityException.php');
+require_once('../Exception/SecurityException.php');
 
 try {
     $token = new \Webnalist\Security\Token\OAuth2PasswordToken(
@@ -13,7 +13,7 @@ try {
         $wnMerchantUsername,
         $wnMerchantPassword
     );
-} catch (\Webnalist\Security\SecurityException $e) {
+} catch (\Webnalist\Exception\SecurityException $e) {
     echo 'Authorization error: #' . $e->getCode() . ' ' . $e->getMessage();
 }
 
@@ -27,7 +27,21 @@ if ($token) {
     $article->price = 100; //1zł
     $article->brand = $wnBrandId;
     $article->categories = [1, 2];
-    $wnMerchantApi->createArticle($article);
+    $response = $wnMerchantApi->createArticle($article);
+
+    echo '<pre>';
+    if (isset($response['type']) && $response['type'] == 'success') {
+        print_r($response['code']);
+        print_r($response['message']);
+        print_r($response['object']);
+        print_r($response['object']['id']);//article id
+    } else {
+        print_r($response['code']);
+        print_r($response['message']);
+        print_r($response['errors']);
+    }
+    echo '</pre>';
+
 }
 
 //update an article price
@@ -37,5 +51,17 @@ if ($token) {
     $article->id = 1;
     $article->price = 100; //1zł
     $wnMerchantApi->updateArticle($article);
+
+    echo '<pre>';
+    if (isset($response['type']) && $response['type'] == 'success') {
+        print_r($response['code']);
+        print_r($response['message']);
+        print_r($response['object']);
+    } else {
+        print_r($response['code']);
+        print_r($response['message']);
+        print_r($response['errors']);
+    }
+    echo '</pre>';
 }
 
