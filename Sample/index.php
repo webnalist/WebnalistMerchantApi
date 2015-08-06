@@ -8,10 +8,10 @@ require_once('../Security/SecurityException.php');
 try {
     $token = new \Webnalist\Security\Token\OAuth2PasswordToken(
         $wnMerchantApiUri,
-        '0_xxxxx',
-        'xxxxxxx',
-        'user@example.com',
-        'user_password'
+        $wnMerchantAppPublicKey,
+        $wnMerchantAppPrivateKey,
+        $wnMerchantUsername,
+        $wnMerchantPassword
     );
 } catch (\Webnalist\Security\SecurityException $e) {
     echo 'Authorization error: #' . $e->getCode() . ' ' . $e->getMessage();
@@ -21,10 +21,11 @@ try {
 if ($token) {
     $wnMerchantApi = new Webnalist\WebnalistMerchantApi($token);
     $article = new stdClass();
-    $article->title = 'Lorem ipsum'; //1zł
-    $article->description = 'Lorem ipsum dolor sit amet'; //1zł
-    $article->originImageUri = 'http://....jpg'; //1zł
+    $article->title = 'Lorem ipsum';
+    $article->description = 'Lorem ipsum dolor sit amet';
+    $article->originImageUri = 'http://....jpg';
     $article->price = 100; //1zł
+    $article->brand = $wnBrandId;
     $article->categories = [1, 2];
     $wnMerchantApi->createArticle($article);
 }
