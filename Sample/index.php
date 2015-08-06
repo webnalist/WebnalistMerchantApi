@@ -1,6 +1,6 @@
 <?php
 
-require_once('config/config.php');
+require_once('config.php');
 require_once('../WebnalistMerchantApi.php');
 require_once('../Security/Token/OAuth2PasswordToken.php');
 require_once('../Exception/SecurityException.php');
