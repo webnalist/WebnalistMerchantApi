@@ -22,6 +22,7 @@ if ($token) {
     $wnMerchantApi = new Webnalist\WebnalistMerchantApi($token);
     $article = new stdClass();
     $article->title = 'Lorem ipsum';
+    $article->status = 0;
     $article->description = 'Lorem ipsum dolor sit amet';
     $article->originImageUri = 'http://....jpg';
     $article->price = 100; //1zł

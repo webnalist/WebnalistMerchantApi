@@ -39,6 +39,8 @@ class WebnalistMerchantApi
     private function curlPostRequest(\stdClass $params, $url)
     {
         $curl = curl_init();
+        $data = json_encode($params);
+        $dataLength = strlen($data);
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
@@ -47,10 +49,11 @@ class WebnalistMerchantApi
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => json_encode($params),
+            CURLOPT_POSTFIELDS => $data,
             CURLOPT_HTTPHEADER => array(
                 "accept: application/json",
-                "content-type: application/json"
+                "content-type: application/json",
+                'content-length: ' . $dataLength
             ),
         ));
         $response = curl_exec($curl);
@@ -71,7 +74,8 @@ class WebnalistMerchantApi
      */
     public function createArticle(\stdClass $article)
     {
-        $url = self::API_URI . '/api/v1/article';
+        $url = self::API_URI . '/article';
+
         return $this->curlPostRequest($article, $url);
     }
 
@@ -85,7 +89,8 @@ class WebnalistMerchantApi
         if (!$article->id) {
             throw new WebnalistMerchantApiException('Article id is not defined.');
         }
-        $url = self::API_URI . '/api/v1/article/' . $article->id;
+        $url = self::API_URI . '/article/' . $article->id;
+
         return $this->curlPostRequest($article, $url);
     }
 }
