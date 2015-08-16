@@ -6,10 +6,10 @@ use Webnalist\Exception\WebnalistMerchantApiException;
 use Webnalist\Security\AuthToken;
 
 /**
- * Created by PhpStorm.
- * User: mateuszdolega
- * Date: 06.08.2015
- * Time: 13:58
+ * Class WebnalistMerchantApi
+ *
+ * @package Webnalist
+ * @see Full documentation & Sandbox http://webnalist.com/api/doc
  */
 class WebnalistMerchantApi
 {
@@ -68,6 +68,7 @@ class WebnalistMerchantApi
     }
 
     /**
+     * Create and article
      * @param \stdClass $article
      * @return mixed
      * @throws WebnalistMerchantApiException
@@ -80,6 +81,8 @@ class WebnalistMerchantApi
     }
 
     /**
+     * Update an article
+     *
      * @param \stdClass $article
      * @return mixed
      * @throws WebnalistMerchantApiException

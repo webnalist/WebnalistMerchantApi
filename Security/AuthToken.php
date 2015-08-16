@@ -3,20 +3,28 @@
 namespace Webnalist\Security;
 
 /**
- * Interface AuthToken
+ * AuthToken abstraction
  * @package Webnalist\Security
  */
 abstract class AuthToken
 {
 
+    /**
+     * @var string Token
+     */
     protected $token;
 
+    /**
+     * @return string|null
+     */
     public function getToken()
     {
         return $this->token;
     }
 
-
+    /**
+     * @param string $token
+     */
     public function setToken($token)
     {
         $this->token = $token;
